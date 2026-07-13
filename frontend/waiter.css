@@ -1,0 +1,487 @@
+/* waiter-styles. das gemeinsame zeug (.card, .badge-*, .overlay, .ws-dot,
+ * .hidden, .app-header) steht in style.css, hier nicht nochmal definieren */
+
+/* bestellliste scrollt für sich, sonst schieben lange queues den rest weg */
+.order-queue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+  padding: var(--md) var(--lg);
+  overflow-y: auto;
+  padding-bottom: 80px; /* platz nach unten, falls mal ein fixed-element dazukommt */
+}
+
+/* bestellkarte, erbt das visuelle von .card (element hat im html beide klassen) */
+.order-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+
+/* kopfzeile der karte: tischnummer links, status-badge rechts */
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-card-table {
+  font-size: var(--size-heading);
+  font-weight: var(--weight-semi);
+}
+
+/* zeit + anzahl artikel, grau/klein */
+.order-card-meta {
+  font-size: var(--size-label);
+  color: var(--muted);
+}
+
+/* aktions-buttons: weiterschalten + details */
+.status-btn-group {
+  display: flex;
+  gap: var(--sm);
+  flex-wrap: wrap;
+  margin-top: var(--sm);
+}
+
+.status-btn-group button {
+  flex: 1;
+  min-height: 48px;
+  border-radius: 12px;
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+}
+
+/* verfügbarkeits-toggle: label umschließt checkbox + track + text */
+.availability-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* echte checkbox weg, .toggle-track ist das sichtbare element */
+.availability-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--disabled-bg);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.availability-toggle input:checked + .toggle-track {
+  background: var(--accent);
+}
+
+/* der gleitende punkt im toggle */
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.2s;
+}
+
+/* checked: punkt nach rechts schieben */
+.availability-toggle input:checked + .toggle-track .toggle-thumb {
+  left: 27px;
+}
+
+.toggle-label {
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+}
+
+/* leere warteschlange */
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: var(--2xl) var(--lg);
+  font-size: var(--size-label);
+}
+
+/* bestelldetail-modal, breit genug für die artikel-liste aber nicht riesig */
+.order-detail-modal {
+  width: min(480px, 90vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+.modal-close {
+  margin-bottom: var(--sm);
+}
+
+/* abschnittsüberschriften im modal (ITEMS, NOTES, ...) */
+.modal-section-label {
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--md);
+  margin-bottom: var(--xs);
+}
+
+.modal-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* eine zeile: name links, menge + preis rechts */
+.modal-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-item-row:last-child {
+  border-bottom: none;
+}
+
+.modal-item-name {
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  flex: 1;
+}
+
+.modal-item-right {
+  display: flex;
+  align-items: baseline;
+  gap: var(--md);
+}
+
+.modal-item-qty {
+  font-size: var(--size-label);
+  color: var(--muted);
+  min-width: 2.5ch;
+  text-align: right;
+}
+
+.modal-item-price {
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  min-width: 5ch;
+  text-align: right;
+}
+
+/* gesamtzeile: dicker strich oben, keiner unten */
+.modal-total-row {
+  border-top: 2px solid var(--border) !important;
+  border-bottom: none !important;
+  margin-top: 4px;
+  font-weight: var(--weight-semi);
+}
+
+/* notizen-block, leicht abgesetzt damit er auffällt */
+.modal-notes {
+  font-size: var(--size-label);
+  background: var(--bg);
+  border-radius: 8px;
+  padding: var(--sm) var(--md);
+  margin: 0;
+}
+
+/* header rechts: toggle + ws-statusdot nebeneinander */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--md);
+}
+
+/* kein padding auf main, das macht der header */
+main {
+  padding: 0;
+}
+
+/* overlay bei eingehendem call. tischnummer groß, damit der kellner
+   auch quer durch den raum sofort sieht wer ruft */
+.call-overlay-card {
+  width: min(400px, 90vw);
+  padding: var(--2xl) var(--lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lg);
+  text-align: center;
+}
+
+.call-heading {
+  font-size: var(--size-heading);
+  font-weight: var(--weight-semi);
+  line-height: 1.2;
+}
+
+.call-table {
+  font-size: var(--size-display);
+  font-weight: var(--weight-semi);
+  color: var(--accent);
+}
+
+.call-subtitle {
+  font-size: var(--size-label);
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* buttons: annehmen / ablehnen */
+.call-btn-group {
+  display: flex;
+  gap: var(--xl);
+  width: 100%;
+}
+
+.call-btn-group button {
+  flex: 1;
+  min-height: 64px;  /* absichtlich riesig, muss man auch in hektik sofort treffen */
+}
+
+/* ws weg? buttons sperren. sonst tippt der kellner auf annehmen und das signaling läuft ins leere */
+body.ws-offline .call-overlay-card {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* fehler-banner falls kamera/mikro streiken, versteckt bis js es einblendet.
+   1:1 aus customer.css kopiert, kein css-@import zum teilen. TODO: irgendwann auslagern */
+.media-error-box {
+  background: rgba(214, 48, 49, 0.06);
+  border: 1px solid var(--destructive);
+  border-radius: 12px;
+  padding: var(--md) var(--lg);
+  margin: var(--md);
+}
+
+.media-error-heading {
+  font-size: var(--size-body);
+  font-weight: var(--weight-semi);
+  color: var(--destructive);
+  margin-bottom: var(--xs);
+}
+
+.media-error-body {
+  font-size: var(--size-label);
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* aktives call-fenster beim kellner, das schwebende video-panel */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* schwebendes fenster, per maus verschiebbar. kein fullscreen, kellner arbeitet nebenbei weiter */
+#waiter-call-active {
+  position: fixed;
+  left: 16px;
+  top: 80px;
+  width: 360px;
+  height: 270px;
+  margin: 0;
+  background: #000;
+  z-index: 150;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+}
+
+#waiter-call-active .call-panel-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+  padding: var(--md) var(--lg);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%);
+  z-index: 10;
+  cursor: grab;
+}
+
+#waiter-call-active .call-live-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease infinite;
+  flex-shrink: 0;
+}
+
+#waiter-call-active .call-panel-heading {
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  color: #fff;
+  margin: 0;
+}
+
+/* resize-griff unten rechts, maus zieht das fenster größer/kleiner.
+   touch geht über zwei-finger-pinch */
+#waiter-call-active .call-resize-grip {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 20px;
+  height: 20px;
+  z-index: 15;
+  cursor: nwse-resize;
+  touch-action: none;
+  background: repeating-linear-gradient(135deg,
+    transparent 0 3px, rgba(255,255,255,0.9) 3px 4px);
+  border-radius: 0 0 8px 0;
+}
+
+/* kontroll-leiste unten mittig: mute + auflegen. flex, damit beide
+   immer zentriert bleiben und nicht mit dem resize-griff kollidieren */
+#waiter-call-active .call-controls {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--sm);
+  z-index: 10;
+}
+
+#waiter-hangup-btn {
+  width: auto;
+  min-width: 120px;
+  min-height: 44px;
+  margin-top: 0;
+}
+
+#waiter-call-active .call-mute-btn {
+  width: auto;
+  min-width: 64px;
+  min-height: 44px;
+  margin-top: 0;
+}
+
+#waiter-call-active .call-mute-btn.is-muted {
+  background: var(--destructive);
+  color: #fff;
+}
+
+#waiter-call-active .call-remote-video-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  background: #111;
+  overflow: hidden;
+}
+
+#waiter-call-active .call-remote-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#waiter-call-active .video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sm);
+  background: #111;
+}
+
+#waiter-call-active .video-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+#waiter-call-active .placeholder-text {
+  font-size: var(--size-label);
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+#waiter-call-active .video-caption {
+  position: absolute;
+  bottom: var(--xs);
+  left: var(--sm);
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin: 0;
+  pointer-events: none;
+}
+
+/* local video, versteckt bis _initPip() daraus eine pip macht
+   (position:absolute im panel) */
+#waiter-call-active .call-local-video-wrap {
+  display: none;
+}
+
+#waiter-call-active .call-local-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#waiter-call-active .call-local-video-wrap.pip-active {
+  display: block;
+  cursor: grab;
+  border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+  border-radius: 8px;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 20; /* über dem Remote-Video, innerhalb des Panels */
+}
+
+.btn-call-table {
+  min-height: 44px;
+  border-radius: 12px;
+  flex: 1;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-call-table:hover {
+  opacity: 0.9;
+}

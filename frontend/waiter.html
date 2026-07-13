@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SHIKGOO — Waiter</title>
+  <!-- shared: tokens, buttons, badges, overlay, ws-dot -->
+  <link rel="stylesheet" href="/style.css">
+  <!-- waiter-spezifisch: queue, order-card, toggle, modal -->
+  <link rel="stylesheet" href="/waiter.css">
+</head>
+<body>
+
+  <!-- header: brand, availability toggle, ws dot -->
+  <header class="app-header">
+    <span class="brand-small">SHIKGOO</span>
+    <div class="header-controls">
+      <!-- toggle: an = verfuegbar, aus = busy -->
+      <label class="availability-toggle">
+        <input type="checkbox" id="availability-toggle" checked>
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label" id="availability-label">Available</span>
+      </label>
+      <span id="ws-status" class="ws-dot" title="WebSocket status"></span>
+    </div>
+  </header>
+
+  <!-- incoming call overlay, kommt bei call_ring, weg bei accept/reject/call_end -->
+  <div id="call-overlay" class="overlay hidden"
+       role="dialog" aria-labelledby="call-heading" aria-modal="true">
+    <div class="call-overlay-card card">
+      <h2 class="call-heading" id="call-heading">Incoming Call</h2>
+      <p class="call-table">Table —</p>
+      <p class="call-subtitle">Tap Accept to connect.</p>
+      <div class="call-btn-group">
+        <button id="call-reject" class="btn-danger">Reject</button>
+        <button id="call-accept" class="btn-primary">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- queue: waiter.js renderQueue(), neueste zuerst. empty-state wenn nix pending -->
+  <main>
+    <!-- aktiver call, laeuft im normalen flow ueber der queue -->
+    <section id="waiter-call-active" class="hidden"
+             aria-label="Active call in progress">
+      <div class="call-panel-header">
+        <span class="call-live-dot" aria-hidden="true"></span>
+        <p class="call-panel-heading">In Call</p>
+      </div>
+      <div class="call-remote-video-wrap">
+        <video id="waiter-remote-video" autoplay playsinline></video>
+        <div id="waiter-remote-placeholder" class="video-placeholder"
+             role="status" aria-label="Connecting to video call">
+          <div class="video-spinner"></div>
+          <p class="placeholder-text">Connecting...</p>
+        </div>
+        <p class="video-caption">Customer</p>
+      </div>
+      <div class="call-local-video-wrap">
+        <video id="waiter-local-video" autoplay muted playsinline></video>
+        <p class="video-caption">You</p>
+      </div>
+      <div class="call-controls">
+        <button id="waiter-mute-btn" class="btn-secondary call-mute-btn" aria-pressed="false"
+                aria-label="Mute microphone">Mute</button>
+        <button id="waiter-hangup-btn" class="btn-danger">End Call</button>
+      </div>
+    </section>
+
+    <div class="order-queue" id="order-queue">
+      <p class="empty-state" id="empty-state">No orders yet. New orders will appear here.</p>
+    </div>
+    <!-- media-error box, hidden bis getUserMedia failt -->
+    <div id="media-error" class="hidden">
+      <div class="media-error-box">
+        <p class="media-error-heading">Camera access denied</p>
+        <p class="media-error-body">To use video calling, allow camera and microphone access in your browser settings, then reload the page.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- order-detail modal, hidden. waiter.js openModal() macht auf, backdrop/close zu -->
+  <div class="overlay hidden" id="order-modal-overlay">
+    <div class="card order-detail-modal" id="order-modal">
+      <button class="btn-secondary modal-close" id="modal-close">Close</button>
+      <!-- modal body fuellt waiter.js openModal() -->
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- toast, aria-live fuer screenreader -->
+  <div class="toast-container" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- reihenfolge zaehlt: app.js vor webrtc.js vor waiter.js -->
+  <script src="/app.js"></script>
+  <script src="/webrtc.js"></script>
+  <script src="/waiter.js"></script>
+
+</body>
+</html>

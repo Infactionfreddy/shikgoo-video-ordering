@@ -1,0 +1,29 @@
+# build artefakte
+build/
+*.o
+web_server
+web_server.exe
+server
+
+# runtime state / logs
+server.log
+*.log
+orders.json
+calls.json
+
+# tls certs / keys (lokal via mkcert / install-pi.sh erzeugen)
+*.pem
+*.key
+*.crt
+
+# bundled windows dlls (selbst mitbringen)
+*.dll
+
+# os junk
+.DS_Store
+__pycache__/
+*.pyc
+
+# projekt-doku / vortrag (privat)
+Dokumentation/
+dokumentation-projekt.tex

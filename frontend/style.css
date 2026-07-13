@@ -1,0 +1,234 @@
+/* gemeinsame basis: farben, spacing, typo, buttons, cards.
+ * alles custom properties, customer.css + waiter.css bauen drauf auf */
+
+:root {
+  --bg:          #f5f6fa;
+  --card:        #ffffff;
+  --accent:      #0984e3;
+  --accent-light:#e1f5fe;
+  --success:     #00b894;
+  --destructive: #d63031;
+  --muted:       #636e72;
+  --border:      #eeeeee;
+  --disabled-bg: #dfe6e9;
+  --disabled-fg: #b2bec3;
+
+  /* status-farben für bestellbadges */
+  --status-pending:   #dfe6e9;
+  --status-accepted:  #0984e3;
+  --status-preparing: #fdcb6e;
+  --status-ready:     #00b894;
+  --status-delivered: #636e72;
+  --status-bill:      #e17055;
+  --status-paid:      #00b894;
+
+  /* spacing: 4px-raster */
+  --xs:  4px;
+  --sm:  8px;
+  --md:  16px;
+  --lg:  24px;
+  --xl:  32px;
+  --2xl: 48px;
+  --3xl: 64px;
+
+  --font:         'Segoe UI', Roboto, Arial, sans-serif;
+  --size-body:    16px;
+  --size-label:   14px;
+  --size-heading: 22px;
+  --size-display: 28px;
+  --weight-normal: 400;
+  --weight-semi:   600;
+}
+
+/* reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: var(--size-body);
+  font-weight: var(--weight-normal);
+  line-height: 1.5;
+  overflow-x: hidden;   /* ipad landscape: verhindert horizontales scrollen */
+  width: 100%;
+}
+
+/* min 44px, sonst trifft man die buttons aufm tablet nicht */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:active, a:active, [role="button"]:active {
+  transform: scale(0.97); /* haptisches feedback simulieren */
+}
+
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: var(--lg);
+}
+
+.card.selected {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--size-body);
+  font-weight: var(--weight-semi);
+  border: none;
+  border-radius: 15px;
+  padding: var(--md);
+}
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  background: var(--card);
+  color: var(--accent);
+  font-size: var(--size-body);
+  font-weight: var(--weight-semi);
+  border: 2px solid var(--accent);
+  border-radius: 15px;
+  padding: var(--md);
+}
+
+.btn-danger {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  background: var(--destructive);
+  color: #fff;
+  font-size: var(--size-body);
+  font-weight: var(--weight-semi);
+  border: none;
+  border-radius: 15px;
+  padding: var(--md);
+}
+
+/* pill-button für aktionen die keine volle breite brauchen */
+.btn-pill {
+  min-height: 52px;
+  background: var(--card);
+  color: var(--destructive);
+  font-weight: var(--weight-semi);
+  border: none;
+  border-radius: 50px;
+  padding: var(--md) var(--xl);
+}
+
+/* status-badges für bestellkarten */
+.badge {
+  display: inline-block;
+  padding: var(--xs) var(--sm);
+  border-radius: 8px;
+  font-size: var(--size-label);
+  font-weight: var(--weight-semi);
+}
+
+.badge-pending   { background: var(--status-pending);   color: var(--muted); }
+.badge-accepted  { background: var(--status-accepted);  color: #fff; }
+.badge-preparing { background: var(--status-preparing); color: #333; }
+.badge-ready     { background: var(--status-ready);     color: #fff; }
+.badge-delivered { background: var(--status-delivered); color: #fff; }
+.badge-bill      { background: var(--status-bill);      color: #fff; }
+.badge-paid      { background: var(--status-paid);      color: #fff; }
+
+/* toast unten mittig, geht nach 3s von selbst weg */
+.toast-container {
+  position: fixed;
+  bottom: var(--xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.toast {
+  background: #2d3436;
+  color: #fff;
+  padding: var(--md) var(--lg);
+  border-radius: 8px;
+  font-size: var(--size-label);
+  animation: slideUp 0.2s ease forwards;
+  white-space: nowrap;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+/* websocket verbindungsanzeige in der kopfzeile */
+.ws-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  background: var(--disabled-bg); /* grau = noch nicht verbunden */
+}
+
+.ws-dot.connected    { background: var(--accent); }
+.ws-dot.reconnecting { background: #fdcb6e; }  /* gelb = versucht zu reconnecten */
+.ws-dot.disconnected { background: var(--destructive); }
+
+.hidden  { display: none !important; }
+.subtitle { color: var(--muted); font-size: var(--size-label); }
+
+/* app-header, gleich auf kunden- und kellner-seite */
+.app-header {
+  background: var(--card);
+  padding: var(--md) var(--lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.brand-small {
+  font-size: var(--size-heading);
+  font-weight: var(--weight-semi);
+  letter-spacing: 1px;
+}

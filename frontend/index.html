@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SHIKGOO</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Role selector — inline styles here so index.html is self-contained
+       (customer.css has the same rules for full-page consistency) */
+    .role-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--xl);
+      padding: var(--2xl) var(--md);
+    }
+
+    h1.brand {
+      font-size: var(--size-display);
+      font-weight: 300;          /* brand-only alias — UI-SPEC.md Typography */
+      letter-spacing: 1px;
+    }
+
+    .role-cards {
+      display: flex;
+      gap: var(--lg);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .role-card {
+      min-width: 180px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md);
+      text-decoration: none;
+      color: inherit;
+      font-size: var(--size-heading);
+      font-weight: var(--weight-semi);
+    }
+
+    .role-icon {
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .role-label {
+      font-size: var(--size-heading);
+      font-weight: var(--weight-semi);
+    }
+  </style>
+</head>
+<body>
+  <div class="role-screen">
+    <h1 class="brand">SHIKGOO</h1>
+    <p class="subtitle">Select your role to continue</p>
+    <div class="role-cards">
+      <a href="/customer" class="card role-card" role="button">
+        <span class="role-icon"></span>
+        <span class="role-label">I'm a Customer</span>
+      </a>
+      <a href="/waiter" class="card role-card" role="button">
+        <span class="role-icon"></span>
+        <span class="role-label">Staff Login</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

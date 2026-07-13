@@ -1,0 +1,154 @@
+[
+  {
+    "id": 1,
+    "name": "Mandu",
+    "price": 690,
+    "category": "Vorspeisen",
+    "description": "Koreanische Teigtaschen mit Schweinefleisch und Gemüse, gedämpft oder gebraten.",
+    "image_url": ""
+  },
+  {
+    "id": 2,
+    "name": "Pajeon",
+    "price": 790,
+    "category": "Vorspeisen",
+    "description": "Knuspriger koreanischer Pfannkuchen mit Frühlingszwiebeln und Meeresfrüchten.",
+    "image_url": ""
+  },
+  {
+    "id": 3,
+    "name": "Kimchi",
+    "price": 390,
+    "category": "Vorspeisen",
+    "description": "Hausgemachtes fermentiertes Chinakohl-Kimchi, scharf und würzig.",
+    "image_url": ""
+  },
+  {
+    "id": 4,
+    "name": "Edamame",
+    "price": 390,
+    "category": "Vorspeisen",
+    "description": "Gesalzene Sojabohnen, warm serviert — ideal zum Teilen.",
+    "image_url": ""
+  },
+  {
+    "id": 5,
+    "name": "Kimchi Jjigae",
+    "price": 1290,
+    "category": "Hauptgerichte",
+    "description": "Würziger Kimchi-Eintopf mit Tofu, Schweinefleisch und Frühlingszwiebeln.",
+    "image_url": ""
+  },
+  {
+    "id": 6,
+    "name": "Bibimbap",
+    "price": 1190,
+    "category": "Hauptgerichte",
+    "description": "Gemischte Reisschüssel mit sautiertem Gemüse, Spiegelei und Gochujang-Sauce.",
+    "image_url": ""
+  },
+  {
+    "id": 7,
+    "name": "Bulgogi",
+    "price": 1490,
+    "category": "Hauptgerichte",
+    "description": "Mariniertes gegrilltes Rindfleisch mit Sesam, Frühlingszwiebeln und Reis.",
+    "image_url": ""
+  },
+  {
+    "id": 8,
+    "name": "Japchae",
+    "price": 1090,
+    "category": "Hauptgerichte",
+    "description": "Glasnudeln mit buntem Gemüse in Soja-Sesam-Sauce gebraten.",
+    "image_url": ""
+  },
+  {
+    "id": 9,
+    "name": "Tteokbokki",
+    "price": 990,
+    "category": "Hauptgerichte",
+    "description": "Gedämpfte Reiskuchen in würzig-süßer Gochujang-Sauce mit Fischkuchen.",
+    "image_url": ""
+  },
+  {
+    "id": 10,
+    "name": "Samgyeopsal",
+    "price": 1690,
+    "category": "Hauptgerichte",
+    "description": "Gegrillter Schweinebauch am Tisch, serviert mit Salat, Knoblauch und Doenjang-Dip.",
+    "image_url": ""
+  },
+  {
+    "id": 11,
+    "name": "Grüner Tee",
+    "price": 290,
+    "category": "Getränke",
+    "description": "Traditioneller koreanischer Grüntee, heiß oder kalt serviert.",
+    "image_url": ""
+  },
+  {
+    "id": 12,
+    "name": "Sikhye",
+    "price": 350,
+    "category": "Getränke",
+    "description": "Süßes koreanisches Reisgetränk, kalt serviert.",
+    "image_url": ""
+  },
+  {
+    "id": 13,
+    "name": "Boricha",
+    "price": 290,
+    "category": "Getränke",
+    "description": "Gerösteter Gerstentee, natürlich koffeinfrei.",
+    "image_url": ""
+  },
+  {
+    "id": 14,
+    "name": "Yuzu-Limonade",
+    "price": 390,
+    "category": "Getränke",
+    "description": "Erfrischende Limonade mit Yuzu-Zitrus, leicht süß und spritzig.",
+    "image_url": ""
+  },
+  {
+    "id": 15,
+    "name": "Cola",
+    "price": 290,
+    "category": "Getränke",
+    "description": "Coca-Cola, 0,33 l, eiskalt serviert.",
+    "image_url": ""
+  },
+  {
+    "id": 16,
+    "name": "Fanta",
+    "price": 290,
+    "category": "Getränke",
+    "description": "Fanta Orange, 0,33 l, eiskalt serviert.",
+    "image_url": ""
+  },
+  {
+    "id": 17,
+    "name": "Bier",
+    "price": 390,
+    "category": "Getränke",
+    "description": "Koreanisches Hite Lager, 0,33 l, frisch gezapft.",
+    "image_url": ""
+  },
+  {
+    "id": 18,
+    "name": "Bingsu",
+    "price": 890,
+    "category": "Desserts",
+    "description": "Koreanisches Rasiereiseis mit roten Bohnen, Kondensmilch und Reiskuchen.",
+    "image_url": ""
+  },
+  {
+    "id": 19,
+    "name": "Hotteok",
+    "price": 490,
+    "category": "Desserts",
+    "description": "Warme koreanische Pfannkuchen gefüllt mit braunem Zucker, Zimt und Nüssen.",
+    "image_url": ""
+  }
+]

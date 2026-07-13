@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SHIKGOO — Customer</title>
+  <meta name="description" content="SHIKGOO customer ordering interface — browse menu, place orders, track status">
+  <meta name="theme-color" content="#0984e3">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/customer.css">
+</head>
+<body>
+
+  <!-- header: brand + ws status dot -->
+  <header class="app-header">
+    <span class="brand-small">SHIKGOO</span>
+    <span id="ws-status" class="ws-dot" title="WebSocket status"></span>
+  </header>
+
+  <!-- tisch waehlen, danach weg -->
+  <section id="table-select" class="table-select-screen">
+    <h2>Select your table</h2>
+    <div class="table-grid" id="table-grid"></div>
+  </section>
+
+  <!-- menu, kommt nach der tisch-auswahl -->
+  <main id="menu-screen" class="hidden">
+    <div class="menu-grid" id="menu-grid">
+      <div class="card menu-item-card skeleton"></div>
+      <div class="card menu-item-card skeleton"></div>
+    </div>
+    <!-- media-error box, hidden bis getUserMedia failt -->
+    <div id="media-error" class="hidden">
+      <div class="media-error-box">
+        <p class="media-error-heading">Camera access denied</p>
+        <p class="media-error-body">To use video calling, allow camera and microphone access in your browser settings, then reload the page.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- warenkorb, feste leiste unten wenn was drin ist -->
+  <div class="cart-drawer hidden" id="cart-drawer">
+    <span id="cart-summary">0 items — €0.00</span>
+    <button class="btn-primary" id="place-order">Place Order</button>
+  </div>
+
+  <!-- order-status stepper nach dem absenden -->
+  <section id="order-status-section" class="hidden">
+    <div class="order-status-bar" id="order-status-bar">
+      <!-- die 5 steps baut customer.js showOrderStatusBar() -->
+    </div>
+  </section>
+
+  <!-- call overlay (fullscreen) wenn der kellner den tisch anruft -->
+  <div id="call-overlay" class="overlay hidden"
+       role="dialog" aria-labelledby="call-heading" aria-modal="true">
+    <div class="call-overlay-card card">
+      <h2 class="call-heading" id="call-heading">Incoming Call</h2>
+      <p class="call-table">Table —</p>
+      <p class="call-subtitle">Tap Accept to connect.</p>
+      <div class="call-btn-group">
+        <button id="call-reject" class="btn-danger">Reject</button>
+        <button id="call-accept" class="btn-primary">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- aktiver call, feste sidebar rechts solange verbunden -->
+  <aside id="call-active-panel" class="hidden"
+         role="complementary" aria-label="Active video call">
+    <div class="call-panel-header">
+      <span class="call-live-dot" aria-hidden="true"></span>
+      <p class="call-panel-heading">In Call</p>
+    </div>
+    <div class="call-remote-video-wrap">
+      <video id="remote-video" autoplay playsinline></video>
+      <div id="remote-placeholder" class="video-placeholder"
+           role="status" aria-label="Connecting to video call">
+        <div class="video-spinner"></div>
+        <p class="placeholder-text">Connecting...</p>
+      </div>
+      <p class="video-caption">Waiter</p>
+    </div>
+    <div class="call-local-video-wrap">
+      <video id="local-video" autoplay muted playsinline></video>
+      <p class="video-caption">You</p>
+    </div>
+    <div class="call-controls">
+      <button id="mute-btn" class="btn-secondary call-mute-btn" aria-pressed="false"
+              aria-label="Mute microphone">Mute</button>
+      <button id="hangup-btn" class="btn-danger">End Call</button>
+    </div>
+  </aside>
+
+  <!-- "wird angerufen" panel solange der kunde klingelt -->
+  <section id="call-status-section" class="hidden">
+    <div class="call-status-card card">
+      <p class="call-status-heading">Calling Waiter...</p>
+      <p class="call-status-sub">Your waiter will be with you shortly.</p>
+      <button id="cancel-call" class="btn-secondary">Cancel Call</button>
+    </div>
+  </section>
+
+  <!-- call-waiter button unten, erst nach tisch-auswahl da -->
+  <button class="btn-primary waiter-call-btn hidden" id="call-waiter">
+    Call Waiter
+  </button>
+
+  <!-- toast container, aria-live fuer screenreader -->
+  <div class="toast-container" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p style="text-align:center;padding:32px;color:#636e72">
+      Please enable JavaScript to use the SHIKGOO ordering system.
+    </p>
+  </noscript>
+
+  <!-- reihenfolge zaehlt: app.js vor webrtc.js vor customer.js -->
+  <script src="/app.js"></script>
+  <script src="/webrtc.js"></script>
+  <script src="/customer.js"></script>
+</body>
+</html>
